@@ -10,6 +10,7 @@ import Editor from "./components/Editor";
 import Lounge from "./components/Lounge";
 import LinkPage from "./components/LinkPage";
 import RequireAuth from "./components/RequireAuth";
+import PersistLogin from "./components/PersistLogin";
 
 function App() {
   const ROLES = {
@@ -29,20 +30,22 @@ function App() {
           <Route path="*" element={<Missing />} />
 
           {/* privete routes */}
-          <Route element={<RequireAuth roles={[ROLES.User]} />}>
-            <Route path="/" element={<Home />} />
-          </Route>
+          <Route path="/" element={<PersistLogin />}>
+            <Route element={<RequireAuth roles={[ROLES.User]} />}>
+              <Route path="/" element={<Home />} />
+            </Route>
 
-          <Route element={<RequireAuth roles={[ROLES.Admin]} />}>
-            <Route path="admin" element={<Admin />} />
-          </Route>
+            <Route element={<RequireAuth roles={[ROLES.Admin]} />}>
+              <Route path="admin" element={<Admin />} />
+            </Route>
 
-          <Route element={<RequireAuth roles={[ROLES.Editor]} />}>
-            <Route path="editor" element={<Editor />} />
-          </Route>
+            <Route element={<RequireAuth roles={[ROLES.Editor]} />}>
+              <Route path="editor" element={<Editor />} />
+            </Route>
 
-          <Route element={<RequireAuth roles={[ROLES.Admin, ROLES.Editor]} />}>
-            <Route path="lounge" element={<Lounge />} />
+            <Route element={<RequireAuth roles={[ROLES.Admin, ROLES.Editor]} />}>
+              <Route path="lounge" element={<Lounge />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
