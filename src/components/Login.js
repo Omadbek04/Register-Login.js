@@ -10,19 +10,20 @@ const Login = () => {
   const location = useLocation();
   const userRef = useRef();
   const errRef = useRef();
-  
+
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  
+  const [checkBox, setCheckBox] = useState("");
+
   useEffect(() => {
     userRef.current.focus();
   }, []);
-  
+
   useEffect(() => {
     setErrMsg("");
   }, [user, pwd]);
-  
+
   const fromm = location.state?.from?.pathname || "/";
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,6 +67,10 @@ const Login = () => {
 
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" onChange={(e) => setPwd(e.target.value)} value={pwd} required />
+          <label htmlFor="remenber" className="check-box">
+            <input id="remenber" checked={checkBox} onChange={(e) => setCheckBox(e.target.value)} name="ramenber" type="checkbox" />
+            <span>Remenber Me</span>
+          </label>
           <button>Sign In</button>
         </form>
         <p>
